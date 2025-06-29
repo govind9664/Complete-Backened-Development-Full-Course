@@ -1,17 +1,18 @@
+// core module
+const path = require("path");
+
+// External module
 const express = require("express");
-const bodyParser = require("body-parser");
+const bodyParse = require("body-parser");
+// Local module
+const rootDir = require("./utils/pathUtils");
+const dummyRouter = require("./routes/dummyRouter");
+const userRouter = require("./routes/userRouter");
+const homeRouter = require("./routes/homeRouter");
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("First Dummy Middleware", req.url, req.method);
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log("Second Dummy Middleware", req.url, req.method);
-  next();
-});
+app.use(dummyRouter);
 
 // app.use((req, res, next) => {
 //   console.log("Third Dummy Middleware", req.url, req.method);
@@ -19,39 +20,14 @@ app.use((req, res, next) => {
 //   next();
 // });
 
-app.get("/", (req, res, next) => {
-  console.log("Handling / for get", req.url, req.method);
-  res.send("<h1> Welcome to the Home Page</h1>");
-});
+app.use(express.urlencoded());
 
-app.get("/contact-us", (req, res, next) => {
-  console.log("Handling /contact-us for get", req.url, req.method);
-  res.send(`<h1> Please give your details here for contact</h1>
-            <form action='/contact-us' method = 'POST'>
-                <input type="text" name="Username" placeholder="Enter your name" />
-                <input type="text" name="Email" placeholder="Enter your email" />
-                <input type="submit" value="Submit"/>
-            </form>
-            `);
-});
+app.use(homeRouter);
 
-app.post("/contact-us", (req, res, next) => {
-  console.log(
-    "First Handling /contact-us for post",
-    req.url,
-    req.method,
-    req.body
-  );
-  next();
-});
+app.use(userRouter);
 
-app.use(bodyParser.urlencoded());
-
-app.post("/contact-us", (req, res, next) => {
-  console.log("Handling /contact-us for post", req.url, req.method, req.body);
-  res.send(
-    "<h1> Thank you for your details. We will will contact you shortly...</h1>"
-  );
+app.use((req, res, next) => {
+  res.sendFile(path.join(rootDir, "views", "404.html"));
 });
 
 const PORT = 3002;
