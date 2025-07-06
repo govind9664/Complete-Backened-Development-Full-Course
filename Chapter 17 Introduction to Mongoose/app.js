@@ -9,7 +9,6 @@ const storeRouter = require("./routes/storeRouter");
 const hostRouter = require("./routes/hostRouter");
 const errorControllers = require("./controllers/errors");
 const rootDir = require("./utils/pathUtils");
-const { mongoConnect } = require("./utils/databaseUtils");
 const { default: mongoose } = require("mongoose");
 
 const app = express();
