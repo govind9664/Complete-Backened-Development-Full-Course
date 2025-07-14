@@ -1,0 +1,66 @@
+<%- include('../partials/head') %>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #fbbf24 100%);
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ef4444;
+      font-size: 1.1rem;
+    }
+    .input-group {
+      position: relative;
+    }
+    .input-with-icon {
+      padding-left: 2.5rem;
+    }
+  </style>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="flex items-center justify-center min-h-screen">
+      <div class="glass-card w-full max-w-md p-10">
+        <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-800 tracking-tight">Login to <span class="text-red-500">AirBnB</span></h1>
+        <form action="/login" method="POST" class="space-y-6">
+          <%- include('../partials/errors') %>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-user"></i></span>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-lock"></i></span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-red-500 to-yellow-400 text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:from-red-600 hover:to-yellow-500 transition duration-300 flex items-center justify-center gap-2">
+            <i class="fa fa-sign-in-alt"></i> Sign in
+          </button>
+        </form>
+        <p class="mt-6 text-center text-gray-600">Don't have an account? <a href="/signup" class="text-red-500 underline hover:text-red-600">Register here</a></p>
+      </div>
+    </main>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </body>
+</html>
