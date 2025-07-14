@@ -1,0 +1,78 @@
+<%- include('../partials/head') %>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #fbbf24 100%);
+      min-height: 100vh;
+    }
+    .card {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+    .img-hover {
+      transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+    }
+    .img-hover:hover {
+      transform: scale(1.04) rotate(-1deg);
+      box-shadow: 0 12px 40px 0 rgba(239,68,68,0.18);
+    }
+    .section-icon {
+      color: #fbbf24;
+      margin-right: 0.5rem;
+      font-size: 1.3rem;
+    }
+  </style>
+  </head>
+  <body>
+      <%- include('../partials/nav') %>
+      <main class="flex justify-center items-center min-h-screen py-10 px-2">
+          <div class="card w-full max-w-6xl p-10">
+              <h2 class="text-4xl text-red-500 font-extrabold text-center mb-10 tracking-tight drop-shadow">Details of <span class="text-gray-800"><%= home.houseName %></span></h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div class="rounded-2xl overflow-hidden shadow-lg">
+                      <img src="<%= home.photo %>" alt="<%= home.name %>" class="w-full h-96 object-cover img-hover">
+                  </div>
+                  <div class="space-y-8">
+                      <div class="border-b pb-4 flex items-start">
+                          <span class="section-icon"><i class="fa fa-align-left"></i></span>
+                          <div>
+                            <h3 class="text-2xl font-semibold mb-2">Description</h3>
+                            <p class="text-gray-600"><%= home.description %></p>
+                          </div>
+                      </div>
+                      <div class="border-b pb-4 flex items-start">
+                          <span class="section-icon"><i class="fa fa-map-marker-alt"></i></span>
+                          <div>
+                            <h3 class="text-2xl font-semibold mb-2">Location</h3>
+                            <p class="text-gray-600"><%= home.location %></p>
+                          </div>
+                      </div>
+                      <div class="border-b pb-4 flex items-start">
+                          <span class="section-icon"><i class="fa fa-dollar-sign"></i></span>
+                          <div>
+                            <h3 class="text-2xl font-semibold mb-2">Price</h3>
+                            <p class="text-green-600 text-xl font-bold">$<%= home.price %> <span class="text-gray-500 font-normal text-base">/ night</span></p>
+                          </div>
+                      </div>
+                      <div class="border-b pb-4 flex items-start">
+                          <span class="section-icon"><i class="fa fa-star"></i></span>
+                          <div>
+                            <h3 class="text-2xl font-semibold mb-2">Rating</h3>
+                            <div class="flex items-center">
+                                <span class="text-yellow-400 text-2xl">★</span>
+                                <span class="ml-2 text-lg font-semibold text-gray-700"><%= home.rating %> / 5</span>
+                            </div>
+                          </div>
+                      </div>
+                      <div>
+                        <%- include('../partials/favourite') %>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </body>
+</html>

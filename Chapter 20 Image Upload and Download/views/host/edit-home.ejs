@@ -1,0 +1,122 @@
+<%- include('../partials/head') %>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #fbbf24 100%);
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+    }
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ef4444;
+      font-size: 1.1rem;
+    }
+    .input-group {
+      position: relative;
+    }
+    .input-with-icon {
+      padding-left: 2.5rem;
+    }
+    .file-input::-webkit-file-upload-button {
+      background: #fbbf24;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .file-input::-webkit-file-upload-button:hover {
+      background: #f59e42;
+    }
+  </style>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="flex items-center justify-center min-h-screen">
+      <div class="glass-card w-full max-w-lg p-10">
+        <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-800 tracking-tight">
+          <%= editing? "Edit" : "Register" %> Your Home on <span class="text-red-500">AirBnB</span>
+        </h1>
+        <form action="/host/<%= editing ? "edit-home":"add-home " %>" method="POST" enctype="multipart/form-data" class="space-y-5">
+          <input type="hidden" name="id" value="<%= editing ? home._id : ''%>" />
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-home"></i></span>
+            <input
+              type="text"
+              name="houseName"
+              value="<%= editing ? home.houseName: '' %>"
+              placeholder="Enter your House Name"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-rupee-sign"></i></span>
+            <input
+              type="text"
+              name="price"
+              value="<%= editing ? home.price:'' %>"
+              placeholder="Price Per Night"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-map-marker-alt"></i></span>
+            <input
+              type="text"
+              name="location"
+              value="<%= editing ? home.location:'' %>"
+              placeholder="Location"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-star"></i></span>
+            <input
+              type="text"
+              name="rating"
+              value="<%= editing ? home.rating:'' %>"
+              placeholder="Rating"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-image"></i></span>
+            <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              class="file-input input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition bg-white"
+            />
+          </div>
+          <div class="input-group">
+            <span class="input-icon"><i class="fa fa-align-left"></i></span>
+            <textarea
+              name="description"
+              placeholder="Describe your Home"
+              class="input-with-icon w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+              required
+            ><%= editing ? home.description:'' %></textarea>
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-red-500 to-yellow-400 text-white py-3 rounded-lg font-semibold text-lg shadow-lg hover:from-red-600 hover:to-yellow-500 transition duration-300 flex items-center justify-center gap-2">
+            <i class="fa fa-save"></i> <%= editing ? "Update Home": "Add Home"%>
+          </button>
+        </form>
+      </div>
+    </main>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </body>
+</html>
